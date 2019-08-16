@@ -72,6 +72,10 @@ if __name__ == "__main__":
         # Configure input
         input_imgs = Variable(input_imgs.type(Tensor))
 
+        if input_imgs.shape[1] == 1:
+            # gray image
+            input_imgs = input_imgs.repeat(1, 3, 1, 1)
+
         # Get detections
         with torch.no_grad():
             detections = model(input_imgs)
